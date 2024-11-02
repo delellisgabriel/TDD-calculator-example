@@ -1,11 +1,14 @@
-import { describe, it, expect, afterEach, beforeEach } from 'vitest'
-import { render, screen, fireEvent, cleanup } from '@testing-library/react'
-import Calculator, { numbersRows, operations } from './Calculator'
+import { describe, it, expect } from 'vitest'
+import { render, screen, fireEvent } from '@testing-library/react'
+import Calculator, { operations } from './Calculator'
 
 const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
+
+// TODO user user-event from testing-library instead of fireEvent
+// TODO Make it so the calculator works after the first arithmetic operation
+
 describe('Calculator', () => {
-  afterEach(cleanup)
 
   it("Should render", () => {
     render(<Calculator />)
@@ -48,7 +51,9 @@ describe('Calculator', () => {
 
   it("Should render an input field", () => {
     render(<Calculator/>)
-
+    // other options
+    // screen.getByRole('textbox')
+    // if there is a form you can lookup the textbox by id
     screen.getByDisplayValue("")
   })
 
@@ -57,6 +62,10 @@ describe('Calculator', () => {
 
     fireEvent.click(screen.getByText("0"))
     screen.getByDisplayValue("0")
+
+    // other way of doing it
+    // const input = screen.getByRole('textbox')
+    // expect(input.value).toBe('1')
   })
 
   it("Should change the input field value to 1+2 when pressing first the button 1 then + button then 1 button again", () => {
@@ -78,4 +87,5 @@ describe('Calculator', () => {
     fireEvent.click(screen.getByText("="))
     screen.getByDisplayValue("15")
   })
+
 })

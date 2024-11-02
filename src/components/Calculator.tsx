@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { evaluate } from "mathjs"
 
 export const numbersRows = [
@@ -18,27 +18,29 @@ const Calculator = () => {
       setValue((prev) => evaluate(prev))
       return
     }
-    setValue((prev) => prev + btnValue)
+    setValue((prev) => prev.concat(btnValue))
   }
 
   return (
     <section>
       <h2>My Calculator</h2>
-      <input onChange={() => {}} value={value} />
-      {numbersRows.map((row: string[], index) => (
-        <div key={index + 1} role={`row`}>
-          {row.map((number: string) => (
-            <button key={number} onClick={() => handleBtnClick(number)}>
-              {number}
-            </button>
-          ))}
-        </div>
-      ))}
-      {operations.map((operation: string, index) => (
-        <button key={index} onClick={() => handleBtnClick(operation)}>
-          {operation}
-        </button>
-      ))}
+      <input readOnly aria-readonly value={value} />
+      <div role="grid">
+        {numbersRows.map((row: string[], index) => (
+          <div key={index + 1} role={`row`}>
+            {row.map((number: string) => (
+              <button key={number} onClick={() => handleBtnClick(number)}>
+                {number}
+              </button>
+            ))}
+          </div>
+        ))}
+        {operations.map((operation: string, index) => (
+          <button key={index} onClick={() => handleBtnClick(operation)}>
+            {operation}
+          </button>
+        ))}
+      </div>
     </section>
   )
 }
