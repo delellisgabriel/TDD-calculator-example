@@ -1,25 +1,25 @@
-import { useEffect, useState } from 'react'
-import { evaluate } from "mathjs"
+import { useState } from "react";
+import { evaluate } from "mathjs";
 
 export const numbersRows = [
   ["7", "8", "9"],
   ["4", "5", "6"],
   ["3", "2", "1"],
-  ["0"]
-]
+  ["0"],
+];
 
-export const operations = ["/", "*", "-", "+", "="]
+export const operations = ["/", "*", "-", "+", "="];
 
 const Calculator = () => {
-  const [value, setValue] = useState("")
+  const [value, setValue] = useState("");
 
   const handleBtnClick = (btnValue: string) => {
-    if(btnValue === "=") {
-      setValue((prev) => evaluate(prev))
-      return
+    if (btnValue === "=") {
+      setValue((prev) => evaluate(prev));
+      return;
     }
-    setValue((prev) => prev.concat(btnValue))
-  }
+    setValue((prev) => prev.concat(btnValue));
+  };
 
   return (
     <section>
@@ -42,7 +42,7 @@ const Calculator = () => {
         ))}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Calculator
+export default Calculator;
